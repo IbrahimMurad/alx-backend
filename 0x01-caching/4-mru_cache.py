@@ -5,7 +5,7 @@ from base_caching import BaseCaching
 from typing import Any
 
 
-class LRUCache(BaseCaching):
+class MRUCache(BaseCaching):
     """ caching system class
     """
 
@@ -24,14 +24,14 @@ class LRUCache(BaseCaching):
             self.element_usage.update({key: self.usage_counter})
             self.usage_counter += 1
             if len(self.cache_data) > BaseCaching.MAX_ITEMS:
-                lru_key = sorted(
+                mru_key = sorted(
                     self.element_usage.items(),
                     key=lambda item: item[1],
-                    reverse=False
-                    )[0][0]
-                self.cache_data.pop(lru_key)
-                self.element_usage.pop(lru_key)
-                print("DISCARD: {}".format(lru_key))
+                    reverse=True
+                    )[1][0]
+                self.cache_data.pop(mru_key)
+                self.element_usage.pop(mru_key)
+                print("DISCARD: {}".format(mru_key))
 
     def get(self, key: Any) -> Any:
         """ reimplements get method from the parent class
