@@ -23,16 +23,17 @@ class LFUCache(BaseCaching):
         # if key or item is none do nothing
         if key and item:
             self.cache_data.update({key: item})
-            # if key is not in element_usage, put the value to 0 else increment  
+            # if key is not in element_usage, put the value to 0 else increment
             usage = self.element_usage.get(key, None)
             if usage is None:
                 self.element_usage.update({key: 0})
             else:
                 self.element_usage[key] += 1
 
-            # if the cache passes the limit, sort element_usage by value in ascending order
-            # pass the first element if it is the new element
-            # get the first key as the least frequent used key and drop it
+            # if the cache passes the limit:
+            # - sort element_usage by value in ascending order
+            # - pass the first element if it is the new element
+            # - get the first key as the least frequent used key and drop it
             if len(self.cache_data) > BaseCaching.MAX_ITEMS:
                 usage_sorted = sorted(
                     self.element_usage.items(),
