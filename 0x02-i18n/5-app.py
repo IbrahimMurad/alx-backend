@@ -67,8 +67,6 @@ def get_locale() -> (str | None):
     """ Get locale to specify language translation """
     if request.args.get('locale') in app.config['LANGUAGES']:
         return request.args.get('locale')
-    if g.user:
-        return g.user.get('locale')
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
