@@ -8,6 +8,8 @@ from flask import (
 )
 from flask_babel import Babel, _
 from typing import Any
+from pytz import timezone
+from pytz.exceptions import UnknownTimeZoneError
 
 
 users = {
@@ -70,6 +72,20 @@ def get_locale() -> (str | None):
     if g.user and g.user.get('locale') in app.config['LANGUAGES']:
         return g.user.get('locale')
     return request.accept_languages.best_match(app.config['LANGUAGES'])
+
+
+@babel.timezoneselector
+def get_timezone() -> (str | None):
+    """ Get timezone to specify time translation """
+    if request.args.get('timezone', None):
+        userTimezone = request.args.get('timezone')
+    if g.user:
+        userTimezone = g.user.get('timezone')
+    try:
+        timezone(userTimezone)
+        return userTimezone
+    except UnknownTimeZoneError:
+        return app.config['BABEL_DEFAULT_TIMEZONE']
 
 
 @app.route('/', strict_slashes=False)
