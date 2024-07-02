@@ -5,7 +5,7 @@ from flask_babel import Babel, _
 
 
 class Config:
-    """ Config class """
+    """ Config class to set up app configuration """
     LANGUAGES = ["en", "fr"]
     BABEL_DEFAULT_LOCALE = "en"
     BABEL_DEFAULT_TIMEZONE = "UTC"
@@ -17,16 +17,16 @@ babel = Babel(app)
 
 
 @babel.localeselector
-def get_locale():
-    """ Get locale """
+def get_locale() -> str:
+    """ Get locale to specify language translation """
     if request.args.get('locale') in app.config['LANGUAGES']:
         return request.args.get('locale')
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
 @app.route('/', strict_slashes=False)
-def basic():
-    """ Basic app """
+def basic() -> str:
+    """ Basic app that says Hello """
     return render_template('4-index.html')
 
 
