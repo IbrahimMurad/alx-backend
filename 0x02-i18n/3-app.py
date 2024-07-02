@@ -2,6 +2,7 @@
 """ Basic Flask app """
 from flask import Flask, render_template, request
 from flask_babel import Babel, _
+from typing import Any
 
 
 class Config:
@@ -17,13 +18,13 @@ babel = Babel(app)
 
 
 @babel.localeselector
-def get_locale() -> str:
+def get_locale() -> (str | None):
     """ Get locale to specify language translation """
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
 @app.route('/', strict_slashes=False)
-def basic():
+def basic() -> Any:
     """ Basic app that says Hello """
     return render_template('3-index.html')
 
