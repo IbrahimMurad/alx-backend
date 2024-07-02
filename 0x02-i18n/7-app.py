@@ -94,7 +94,7 @@ def basic() -> Any:
     username = None
     if g.user:
         username = g.user.get('name')
-    return render_template('6-index.html', username=username)
+    return render_template('7-index.html', username=username)
 
 
 if __name__ == "__main__":
