@@ -7,7 +7,7 @@ from flask import (
     g,
 )
 from flask_babel import Babel, _
-from typing import Any
+from typing import Any, Union
 
 
 users = {
@@ -34,7 +34,7 @@ users = {
 }
 
 
-def get_user(id: (int | None)) -> (dict | None):
+def get_user(id: Union[int, None]) -> Union[dict, None]:
     """ Get user from users (the db mock) """
     if id in users:
         return users[id]
@@ -63,7 +63,7 @@ def before_request() -> None:
 
 
 @babel.localeselector
-def get_locale() -> (str | None):
+def get_locale() -> str:
     """ Get locale to specify language translation """
     if request.args.get('locale') in app.config['LANGUAGES']:
         return request.args.get('locale')

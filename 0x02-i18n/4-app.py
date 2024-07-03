@@ -18,7 +18,7 @@ babel = Babel(app)
 
 
 @babel.localeselector
-def get_locale() -> (str | None):
+def get_locale() -> str:
     """ Get locale to specify language translation """
     if request.args.get('locale') in app.config['LANGUAGES']:
         return request.args.get('locale')

@@ -7,7 +7,7 @@ from flask import (
     g,
 )
 from flask_babel import Babel, _, format_datetime
-from typing import Any
+from typing import Any, Union, Optional
 from pytz import timezone
 from pytz.exceptions import UnknownTimeZoneError
 from datetime import datetime
@@ -37,7 +37,7 @@ users = {
 }
 
 
-def get_user(id: (int | None)) -> (dict | None):
+def get_user(id: Optional[int]) -> Union[dict, None]:
     """ Get user from users (the db mock) """
     if id in users:
         return users[id]
@@ -66,7 +66,7 @@ def before_request() -> None:
 
 
 @babel.localeselector
-def get_locale() -> (str | None):
+def get_locale() -> str:
     """ Get locale to specify language translation """
     if request.args.get('locale') in app.config['LANGUAGES']:
         return request.args.get('locale')
@@ -76,7 +76,7 @@ def get_locale() -> (str | None):
 
 
 @babel.timezoneselector
-def get_timezone() -> (str | None):
+def get_timezone() -> str:
     """ Get timezone to specify time translation """
     if request.args.get('timezone', None):
         userTimezone = request.args.get('timezone')
