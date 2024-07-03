@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-""" Basic Flask app """
+""" This is a basic Flask app that says Hello and uses Babel for i18n """
 from flask import Flask, render_template, request
 from flask_babel import Babel, _
 from typing import Any
@@ -24,7 +24,7 @@ def get_locale() -> str:
 
 
 @app.route('/', strict_slashes=False)
-def basic() -> Any:
+def basic():
     """ Basic app that says Hello """
     return render_template('3-index.html')
 
