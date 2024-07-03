@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-""" This is a basic Flask app that says Hello and uses Babel for i18n """
+""" This is a basic Flask app that says Hello
+and uses Babel for i18n """
 from flask import (
     Flask,
     render_template,
@@ -96,7 +97,7 @@ def basic():
     if g.user:
         username = g.user.get('name')
     return render_template(
-            '7-index.html',
+            'index.html',
             username=username,
             current_time=format_datetime(datetime.now(), format="full")
             )

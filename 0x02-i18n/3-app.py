@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-""" This is a basic Flask app that says Hello and uses Babel for i18n """
+""" This is a basic Flask app that says Hello
+and uses Babel for i18n """
 from flask import Flask, render_template, request
 from flask_babel import Babel, _
 from typing import Any
